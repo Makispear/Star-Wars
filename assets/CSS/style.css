@@ -115,7 +115,8 @@ header {
 }
 
 #results .info-title {
-    margin: 5px;
+    margin: 5px;    
+    color: rgb(224, 221, 13);
     font-size: 30px;
 }
 
@@ -138,6 +139,7 @@ header {
 .content-list {
     display: flex;
     flex-flow: column wrap;
+    list-style-type: decimal;
 }
 
 .content-list > * {
