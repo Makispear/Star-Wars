@@ -35,7 +35,7 @@ $('button.generate').on('click', (e) => {
     $.get(`https://akabab.github.io/starwars-api/api/${all}.json`, (data) => {
         // loop through the returned data 
         console.log(data[1].affiliations)
-        data.forEach(obj => {
+        $.each(data, (index, obj) => {
             const getName = () => {
                 if (obj.name) {
                     return `
