@@ -74,7 +74,7 @@ $('button.generate').on('click', (e) => {
 
             let loopAffiliations = () => {
                 let affArr = obj.affiliations
-                const aff = affArr.map(element => {
+                const aff = $.map(affArr, (element) => {
                     return `
                     <li class="content-item affiliations line-height-third">${element}</li>
                     `
@@ -179,7 +179,7 @@ $('button.filter').on('click', (e) => {
 
             let loopAffiliations = () => {
                 let affArr = obj.affiliations
-                const aff = affArr.map(element => {
+                const aff = $.map(affArr, (element) => {
                     return `
                     <li class="content-item affiliations line-height-third">${element}</li>
                     `
