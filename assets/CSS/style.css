@@ -1,0 +1,145 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Russo One', sans-serif;
+    list-style: none;
+}
+
+body {
+    background-color: black;
+    color: white;
+}
+
+a:visited, a {
+    color: rgb(224, 221, 13);
+
+}
+
+.line-height-third {
+    line-height: 0.3;
+}
+
+.affiliations {
+    padding: 1px;
+    margin: 5px;
+    text-align: start;
+
+}
+
+/* header  */
+header {
+    display: flex;
+    justify-content: center;
+    width: 100;
+    position: fixed;
+    width: 100%;
+    background-color: rgb(105, 9, 9);
+    color: rgb(224, 221, 13);
+}
+
+/* controls   */
+#controls {
+    background-color: rgb(16, 22, 104);
+    color: white;
+    top: 40px;
+    position: fixed;
+    display: flex;
+    padding: 10px;
+    width: 100%;
+    justify-content: center;
+}
+
+#controls form {
+    display: flex;
+    justify-content: space-between;
+    flex-flow: row wrap;
+}
+
+#controls button {
+    background-color: rgb(105, 9, 9);
+    color: rgb(224, 221, 13);
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.selector-div {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.selector-div select {
+    width: 100px;
+}
+
+.btn-div {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+/* results  */
+
+
+#results {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    color: white;
+    padding-top: 200px;
+}
+
+#results .singleCharacter {
+    border: 2px solid yellow;
+    border-radius: 10px;
+    width: max-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: row wrap;
+    padding: 10px;
+    margin: 10px;
+}
+
+#results .img-div {
+    display: flex;
+    justify-content: center;
+}
+
+#results .img-div img {
+    width: 250px;
+    background-color: black;
+    border-radius: 5px;
+    margin: 10px;
+}
+
+#results .info-title {
+    margin: 5px;
+    font-size: 30px;
+}
+
+#results .info-ul {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    min-width: 250px;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+#results .info-list-item {
+    padding: 5px;
+    display: flex;
+    flex-flow: column wrap;
+}
+
+.content-list {
+    display: flex;
+    flex-flow: column wrap;
+}
+
+.content-list > * {
+    padding: 5px;
+}
