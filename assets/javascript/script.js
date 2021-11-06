@@ -97,8 +97,8 @@ $('button.generate').on('click', (e) => {
 
             const getWikiPage = () => {
                 return `
-                <p class="line-height-third">
-                    Visit character <a href="${obj.wiki}" target="_blank">wiki</a> for more information!
+                <p class="line-height-third wiki">
+                    * Visit character <a href="${obj.wiki}" target="_blank">wiki</a> for more information!
                 </p>
                 `
             }
@@ -126,6 +126,8 @@ $('button.generate').on('click', (e) => {
 
 $('button.filter').on('click', (e) => {
     e.preventDefault()
+    $(resultsSection).html('')
+
     let result = []
     let genderChosen = $('select[name="gender"]').val().trim()
     let locationChosen = $('select[name="location"]').val().trim()
@@ -135,4 +137,93 @@ $('button.filter').on('click', (e) => {
         result.push(data.filter(element => element.bornLocation === locationChosen ))
         console.log(result)
     })
+
+
+        // loop through the returned data 
+        result.forEach(obj => {
+            const getName = () => {
+                if (obj.name) {
+                    return `
+                    <li>
+                        <h2 class="info-title">Name</h2>
+                            <p>${obj.name}</p>
+                    </li>
+                    
+                    `
+                }
+                return ''
+            }
+
+            const getGender = () => {
+                if (obj.gender) {
+                    return `
+                    <li class="info-list-item">
+                        <h2 class="info-title">Gender</h2>
+                        <ol class="content-list">
+                            <li class="content-item">${obj.gender}</li>
+                        </ol>
+                    </li>
+                    `
+                }
+                return ''
+            }
+
+            const getImage = () => {
+                if (obj.image) {
+                    return `
+                    <img src="${obj.image}" alt="${obj['name']}'s image">
+                    `
+                }
+                return ''
+            }
+
+            let loopAffiliations = () => {
+                let affArr = obj.affiliations
+                const aff = affArr.map(element => {
+                    return `
+                    <li class="content-item affiliations line-height-third">${element}</li>
+                    `
+                });
+                return aff.join("")
+            }
+
+            const getAffiliations = () => {
+                if (obj.affiliations) {
+                    return `
+                    <li class="info-list-item">
+                        <h2 class="info-title">Affiliations</h2>
+                        <ol class="content-list">
+                            ${loopAffiliations()}
+                        </ol>
+                    </li>
+                    `
+                }
+            }
+
+            const getWikiPage = () => {
+                return `
+                <p class="line-height-third wiki">
+                    * Visit character <a href="${obj.wiki}" target="_blank">wiki</a> for more information!
+                </p>
+                `
+            }
+
+            const singleCharacterDiv = `
+            <div class="singleCharacter">
+                    <div class="img-div">
+                        ${getImage()}
+                    </div>
+                    <div class="info-div">
+                        <ul class="info-ul">
+                            ${getName()}
+                            ${getGender()}
+                            ${getAffiliations()}
+                            ${getWikiPage()}
+                        </ul>
+                    </div>
+            </div>
+            `
+            resultsSection.append(singleCharacterDiv)
+            
+        })
 })
