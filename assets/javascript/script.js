@@ -89,7 +89,7 @@ const generateRandomChar = (e) => {
             const singleCharacterDiv = `
                 <div class="singleCharacter">
                         <div class="img-div">
-                            <img src="${data.image}">
+                                ${getImage()}
                         </div>
                         <div class="info-div">
                             <ul class="info-ul">
