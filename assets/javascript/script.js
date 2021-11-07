@@ -98,7 +98,7 @@ $('button.generate').on('click', (e) => {
             const getWikiPage = () => {
                 return `
                 <p class="line-height-third wiki">
-                    * Visit character <a href="${obj.wiki}" target="_blank">wiki</a> for more information!
+                    * Learn <a href="${obj.wiki}" target="_blank">more</a> about ${obj.name}!
                 </p>
                 `
             }
