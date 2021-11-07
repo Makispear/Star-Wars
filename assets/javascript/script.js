@@ -1,37 +1,110 @@
-const randomNumber = Math.ceil(Math.random() * 88)
 const all = 'all'
 const resultsSection = $('#results')
 
-let helper = {
-    0: "id",
-    1: "name",
-    2: "height",
-    3: "mass",
-    4: "gender",
-    5: "homeworld",
-    6: "wiki",
-    7: "image",
-    8: "born",
-    9: "bornLocation",
-    10: "died",
-    11: "diedLocation",
-    12: "species",
-    13: "hairColor",
-    14: "eyeColor",
-    15: "skinColor",
-    16: "cybernetics",
-    17: "affiliations",
-    18: "masters",
-    19: "apprentices",
-    20: "formerAffiliations"
+const generateRandomChar = (e) => {
+    e.preventDefault()
+    const randomNumber = Math.ceil(Math.random() * 88)
+    $(resultsSection).html('')
+    // Fetch all characters 
+    $.get(`https://akabab.github.io/starwars-api/api/id/${randomNumber}.json`, (data) => {
+        // console.log(data)
+        console.log(randomNumber)
+        const getName = () => {
+            if (data.name) {
+                return `
+                <li>
+                    <h2 class="info-title">Name</h2>
+                        <p>${data.name}</p>
+                </li>
+                
+                `
+            }
+            return ''
+        }
+
+        const getGender = () => {
+            if (data.gender) {
+                return `
+                <li class="info-list-item">
+                    <h2 class="info-title">Gender</h2>
+                    <ol class="content-list">
+                        <li class="content-item">${data.gender}</li>
+                    </ol>
+                </li>
+                `
+            }
+            return ''
+        }
+
+        const getImage = () => {
+            if (data.image) {
+                if (data.name === 'Mon Mothma') {
+                    return `
+                    <img src="./assets/images/Monmothma.jpg" alt="Mon Mothma's image">
+                    `
+                } else if (data.name === 'San Hill') {
+                    return `
+                    <img src="./assets/images/sanhills.jpg" alt="Mon Mothma's image">
+                    `
+                } else {
+                    return `
+                    <img src="${data.image}" alt="${data['name']}'s image">
+                    `
+                }
+            }
+            return ''
+        }
+
+        let loopAffiliations = () => {
+            let affArr = data.affiliations
+            const aff = affArr.map(element => {
+                return `
+                <li class="content-item affiliations line-height-third">${element}</li>
+                `
+            });
+            return aff.join("")
+        }
+
+        const getAffiliations = () => {
+            if (data.affiliations) {
+                return `
+                <li class="info-list-item">
+                    <h2 class="info-title">Affiliations</h2>
+                    <ol class="content-list">
+                        ${loopAffiliations()}
+                    </ol>
+                </li>
+                `
+            }
+        }
+
+        const getWikiPage = () => {
+            return `
+            <p class="line-height-third wiki">
+                * Visit character <a href="${data.wiki}" target="_blank">wiki</a> for more information!
+            </p>
+            `
+        }
+
+            const singleCharacterDiv = `
+                <div class="singleCharacter">
+                        <div class="img-div">
+                            <img src="${data.image}">
+                        </div>
+                        <div class="info-div">
+                            <ul class="info-ul">
+                                ${getName()}
+                                ${getGender()}
+                                ${getAffiliations()}
+                                ${getWikiPage()}
+                            </ul>
+                        </div>
+                </div>
+                `
+                resultsSection.append(singleCharacterDiv)
+    })
 }
 
-generateAll = $('button.generate')
-
-generateAll.on('click', (e) => {
-    e.preventDefault()
-    return getAll(e)
-})
 
 let getAll = (e) => {
     e.preventDefault()
@@ -70,9 +143,19 @@ let getAll = (e) => {
 
             const getImage = () => {
                 if (obj.image) {
-                    return `
-                    <img src="${obj.image}" alt="${obj['name']}'s image">
-                    `
+                    if (obj.name === 'Mon Mothma') {
+                        return `
+                        <img src="./assets/images/Monmothma.jpg" alt="Mon Mothma's image">
+                        `
+                    } else if (obj.name === 'San Hill') {
+                        return `
+                        <img src="./assets/images/sanhills.jpg" alt="Mon Mothma's image">
+                        `
+                    } else {
+                        return `
+                        <img src="${obj.image}" alt="${obj['name']}'s image">
+                        `
+                    }
                 }
                 return ''
             }
@@ -129,7 +212,8 @@ let getAll = (e) => {
     })
 }
 
-$('button.filter').on('click', (e) => {
+
+const filterCharacters = (e) => {
     e.preventDefault()
     $(resultsSection).html('')
 
@@ -233,4 +317,29 @@ $('button.filter').on('click', (e) => {
             resultsSection.append(singleCharacterDiv)
             
         })
+}
+
+
+const generateAll = $('button.generate')
+generateAll.on('click', (e) => {
+    e.preventDefault()
+    return getAll(e)
+})
+
+const filterBtn = $('button.filter')
+filterBtn.on('click', (e) => {
+    e.preventDefault()
+    return filterCharacters(e)
+})
+
+const clearBtn = $('button.clear')
+clearBtn.on('click', (e) => {
+    e.preventDefault()
+    $(resultsSection).html('')
+})
+
+const RandomBtn = $('button.random')
+RandomBtn.on('click', (e) => {
+    e.preventDefault()
+    return generateRandomChar(e)
 })
