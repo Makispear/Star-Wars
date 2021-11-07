@@ -26,9 +26,14 @@ let helper = {
     20: "formerAffiliations"
 }
 
- 
+generateAll = $('button.generate')
 
-$('button.generate').on('click', (e) => {
+generateAll.on('click', (e) => {
+    e.preventDefault()
+    return getAll(e)
+})
+
+let getAll = (e) => {
     e.preventDefault()
     $(resultsSection).html('')
     // Fetch all characters 
@@ -74,7 +79,7 @@ $('button.generate').on('click', (e) => {
 
             let loopAffiliations = () => {
                 let affArr = obj.affiliations
-                const aff = $.map(affArr, (element) => {
+                const aff = affArr.map(element => {
                     return `
                     <li class="content-item affiliations line-height-third">${element}</li>
                     `
@@ -98,7 +103,7 @@ $('button.generate').on('click', (e) => {
             const getWikiPage = () => {
                 return `
                 <p class="line-height-third wiki">
-                    * Learn <a href="${obj.wiki}" target="_blank">more</a> about ${obj.name}!
+                    * Visit character <a href="${obj.wiki}" target="_blank">wiki</a> for more information!
                 </p>
                 `
             }
@@ -122,7 +127,7 @@ $('button.generate').on('click', (e) => {
             
         })
     })
-})
+}
 
 $('button.filter').on('click', (e) => {
     e.preventDefault()
@@ -131,8 +136,10 @@ $('button.filter').on('click', (e) => {
     let result = []
     let genderChosen = $('select[name="gender"]').val().trim()
     let locationChosen = $('select[name="location"]').val().trim()
-    console.log(genderChosen)
-    console.log(locationChosen)
+
+    if (genderChosen === 'default' && locationChosen === 'default') {
+        return getAll(e)
+    }
     $.get(`https://akabab.github.io/starwars-api/api/${all}.json`, (data) => {
         result.push(data.filter(element => element.bornLocation === locationChosen ))
         console.log(result)
@@ -179,7 +186,7 @@ $('button.filter').on('click', (e) => {
 
             let loopAffiliations = () => {
                 let affArr = obj.affiliations
-                const aff = $.map(affArr, (element) => {
+                const aff = affArr.map(element => {
                     return `
                     <li class="content-item affiliations line-height-third">${element}</li>
                     `
