@@ -5,8 +5,8 @@ An application that helps users search for Star Wars Characters easily. By click
 
 
 ## Links
-[Live Deployment](https://makispear.github.io/Star-Wars/)
-[GitHub Repository](https://github.com/Makispear/Star-Wars)
+- [Live Deployment](https://makispear.github.io/Star-Wars/)
+- [GitHub Repository](https://github.com/Makispear/Star-Wars)
 
 ## Features 
 - Find All Characters
