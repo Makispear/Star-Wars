@@ -1,7 +1,7 @@
 # Star-Wars
 
 ## Description
-    An application that helps users search for Star Wars Characters easily. By clicking a few buttons, you can find information about your favorite character.
+An application that helps users search for Star Wars Characters easily. By clicking a few buttons, you can find information about your favorite character.
 
 
 ## Links
