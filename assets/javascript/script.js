@@ -1,10 +1,13 @@
 const all = 'all'
-const resultsSection = $('#results')
+const resultsDiv = $('#results')
+const resultsSection = $('.results-section')
+
+
 
 const generateRandomChar = (e) => {
     e.preventDefault()
+    $(resultsDiv).html('')
     const randomNumber = Math.ceil(Math.random() * 88)
-    $(resultsSection).html('')
     // Fetch all characters 
     $.get(`https://akabab.github.io/starwars-api/api/id/${randomNumber}.json`, (data) => {
         // console.log(data)
@@ -66,7 +69,7 @@ const generateRandomChar = (e) => {
         }
 
         const getAffiliations = () => {
-            if (data.affiliations) {
+            if (data.affiliations.length) {
                 return `
                 <li class="info-list-item">
                     <h2 class="info-title">Affiliations</h2>
@@ -74,6 +77,10 @@ const generateRandomChar = (e) => {
                         ${loopAffiliations()}
                     </ol>
                 </li>
+                `
+            } else {
+                return `
+                <li class="content-item affiliations line-height-third font-red">NO AFFILIATIONS</li>
                 `
             }
         }
@@ -101,14 +108,14 @@ const generateRandomChar = (e) => {
                         </div>
                 </div>
                 `
-                resultsSection.append(singleCharacterDiv)
+                resultsDiv.append(singleCharacterDiv)
     })
 }
 
 
 let getAll = (e) => {
     e.preventDefault()
-    $(resultsSection).html('')
+    $(resultsDiv).html('')
     // Fetch all characters 
     $.get(`https://akabab.github.io/starwars-api/api/${all}.json`, (data) => {
         // loop through the returned data 
@@ -171,7 +178,7 @@ let getAll = (e) => {
             }
 
             const getAffiliations = () => {
-                if (obj.affiliations) {
+                if (obj.affiliations.length) {
                     return `
                     <li class="info-list-item">
                         <h2 class="info-title">Affiliations</h2>
@@ -179,6 +186,10 @@ let getAll = (e) => {
                             ${loopAffiliations()}
                         </ol>
                     </li>
+                    `
+                } else {
+                    return `
+                    <li class="content-item affiliations line-height-third font-red">NO AFFILIATIONS</li>
                     `
                 }
             }
@@ -206,8 +217,7 @@ let getAll = (e) => {
                     </div>
             </div>
             `
-            resultsSection.append(singleCharacterDiv)
-            
+            resultsDiv.append(singleCharacterDiv)
         })
     })
 }
@@ -215,7 +225,7 @@ let getAll = (e) => {
 
 const filterCharacters = (e) => {
     e.preventDefault()
-    $(resultsSection).html('')
+    $(resultsDiv).html('')
 
     let result = []
     let genderChosen = $('select[name="gender"]').val().trim()
@@ -314,8 +324,7 @@ const filterCharacters = (e) => {
                     </div>
             </div>
             `
-            resultsSection.append(singleCharacterDiv)
-            
+            resultsDiv.append(singleCharacterDiv)
         })
 }
 
@@ -333,9 +342,9 @@ filterBtn.on('click', (e) => {
 })
 
 const clearBtn = $('button.clear')
-clearBtn.on('click', (e) => {
+clearBtn.click((e) => {
     e.preventDefault()
-    $(resultsSection).html('')
+    return resultsDiv.html('')
 })
 
 const RandomBtn = $('button.random')

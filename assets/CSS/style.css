@@ -6,6 +6,10 @@
     list-style: none;
 }
 
+.font-red {
+    color: red;
+}
+
 body {
     background-color: rgb(0, 0, 0);
     color: white;
@@ -33,13 +37,13 @@ header {
     justify-content: center;
     width: 100;
     width: 100%;
-    background-color: rgb(105, 9, 9);
+    background-color: rgb(0, 0, 0);
     color: rgb(224, 221, 13);
 }
 
 /* controls   */
 #controls {
-    background-color: rgb(16, 22, 104);
+    background-color: rgb(31, 31, 31);
     color: white;
     display: flex;
     flex-flow: row nowrap;
@@ -49,46 +53,78 @@ header {
 
 #controls form {
     display: flex;
-    justify-content: space-between;
-    vertical-align: middle;
+    /* width: 100%; */
+    min-height: 100vh;
+    justify-content: center;
+    align-items: center;
     flex-flow: row wrap;
-}
-
-#controls button {
-    background-color: rgb(105, 9, 9);
-    color: rgb(224, 221, 13);
-    padding: 5px;
-    margin: 5px 0;
-    height: min-content;
+    /* border: 2px solid yellow; */
     border-radius: 5px;
 }
 
-.selector-div {
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: end;
-    width: 100%;
+#controls form > div {
+    border-radius: 10px;
+    height: max-content;
 }
 
-.selector-div select {
-    width: 200px;
+.filter-div {
+    display: flex;
+    flex-flow: column nowrap;
+    margin: 30px;
+    align-items: center;
+    border: 2px solid yellow;
+}
+
+.filter-div > div {
+    padding: 20px;
 }
 
 .btn-div {
     display: flex;
-    justify-content: space-between;
-    width: 100%;
+    flex-flow: column nowrap;
+    margin: 30px;
+    align-items: center;
+    border: 2px solid yellow;
+}
+
+.btn-div > div {
+    padding: 20px;
+}
+
+button {
+    padding: 5px;
+    margin: 10px;
+    border-radius: 5px;
+    background-color: yellow;
+    color: rgb(0, 0, 0);
+}
+
+.selector-div {
+    position: relative;
+}
+
+
+
+            /* btns  */
+.clear {
+    background-color: red;
+    color: white;
+    padding: 10px;
+    position: absolute;
+    right: 0;
 }
 
 /* results  */
-
+.results-section {
+    position: relative;
+}
 
 #results {
     display: flex;
     flex-flow: row wrap;
     justify-content: space-around;
     color: white;
-    padding-top: 200px;
+    padding-top: 50px;
 }
 
 #results .singleCharacter {
@@ -110,9 +146,9 @@ header {
 
 #results .img-div img {
     width: 250px;
+    min-width: 250px;
     background-color: transparent;
     border-radius: 5px;
-    margin: 10px;
 }
 
 #results .info-title {
