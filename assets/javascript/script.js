@@ -10,8 +10,6 @@ const generateRandomChar = (e) => {
     const randomNumber = Math.ceil(Math.random() * 88)
     // Fetch all characters 
     $.get(`https://akabab.github.io/starwars-api/api/id/${randomNumber}.json`, (data) => {
-        // console.log(data)
-        console.log(randomNumber)
         const getName = () => {
             if (data.name) {
                 return `
@@ -119,7 +117,6 @@ let getAll = (e) => {
     // Fetch all characters 
     $.get(`https://akabab.github.io/starwars-api/api/${all}.json`, (data) => {
         // loop through the returned data 
-        console.log(data[1].affiliations)
         $.each(data, (index, obj) => {
             const getName = () => {
                 if (obj.name) {
@@ -228,20 +225,22 @@ const filterCharacters = (e) => {
     $(resultsDiv).html('')
 
     let result = []
-    let genderChosen = $('select[name="gender"]').val().trim()
-    let locationChosen = $('select[name="location"]').val().trim()
+    let genderChosen = $('select[name="gender"]').val()
 
-    if (genderChosen === 'default' && locationChosen === 'default') {
-        return getAll(e)
-    }
+    // check for input and push accordingly 
+        if (genderChosen) {
+            result.push(genderChosen)
+        } 
+        if (!genderChosen) {
+            return getAll(e)
+        } 
+        
+
+    // check if user wants a filtered result 
+
     $.get(`https://akabab.github.io/starwars-api/api/${all}.json`, (data) => {
-        result.push(data.filter(element => element.bornLocation === locationChosen ))
-        console.log(result)
-    })
-
-
-        // loop through the returned data 
-        result.forEach(obj => {
+        let filteredData = data.filter(char => char.gender === genderChosen)
+        $.each(filteredData, (index, obj) => {
             const getName = () => {
                 if (obj.name) {
                     return `
@@ -255,25 +254,21 @@ const filterCharacters = (e) => {
                 return ''
             }
 
-            const getGender = () => {
-                if (obj.gender) {
-                    return `
-                    <li class="info-list-item">
-                        <h2 class="info-title">Gender</h2>
-                        <ol class="content-list">
-                            <li class="content-item">${obj.gender}</li>
-                        </ol>
-                    </li>
-                    `
-                }
-                return ''
-            }
-
             const getImage = () => {
                 if (obj.image) {
-                    return `
-                    <img src="${obj.image}" alt="${obj['name']}'s image">
-                    `
+                    if (obj.name === 'Mon Mothma') {
+                        return `
+                        <img src="./assets/images/Monmothma.jpg" alt="Mon Mothma's image">
+                        `
+                    } else if (obj.name === 'San Hill') {
+                        return `
+                        <img src="./assets/images/sanhills.jpg" alt="Mon Mothma's image">
+                        `
+                    } else {
+                        return `
+                        <img src="${obj.image}" alt="${obj['name']}'s image">
+                        `
+                    }
                 }
                 return ''
             }
@@ -289,7 +284,7 @@ const filterCharacters = (e) => {
             }
 
             const getAffiliations = () => {
-                if (obj.affiliations) {
+                if (obj.affiliations.length) {
                     return `
                     <li class="info-list-item">
                         <h2 class="info-title">Affiliations</h2>
@@ -297,6 +292,10 @@ const filterCharacters = (e) => {
                             ${loopAffiliations()}
                         </ol>
                     </li>
+                    `
+                } else {
+                    return `
+                    <li class="content-item affiliations line-height-third font-red">NO AFFILIATIONS</li>
                     `
                 }
             }
@@ -317,7 +316,6 @@ const filterCharacters = (e) => {
                     <div class="info-div">
                         <ul class="info-ul">
                             ${getName()}
-                            ${getGender()}
                             ${getAffiliations()}
                             ${getWikiPage()}
                         </ul>
@@ -326,6 +324,8 @@ const filterCharacters = (e) => {
             `
             resultsDiv.append(singleCharacterDiv)
         })
+    })
+
 }
 
 

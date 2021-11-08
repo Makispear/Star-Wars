@@ -6,17 +6,46 @@
     list-style: none;
 }
 
+img, button {
+    user-select: none;
+}
+
+
+::-webkit-scrollbar-thumb {
+    background-color: rgb(var(--white));
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar {
+    background-color: rgb(var(--grey));
+}
+
+::-webkit-scrollbar-button {
+    background-color: rgb(var(--yellow));
+}
+
+:root {
+    /* --greenish-grey: 31, 31, 31; */
+    --greenish-grey: 31, 39, 31;
+    --grey: 31, 31, 31;
+    --black: 0, 0, 0;
+    --yellow: 224, 201, 13;
+    --white: 255, 255, 255;
+    --red: 255, 0, 0;
+}
+
 .font-red {
-    color: red;
+    color: rgb(var(--red));
 }
 
 body {
-    background-color: rgb(0, 0, 0);
-    color: white;
+    position: relative;
+    background-color: rgb(var(--black));
+    color: rgb(var(--white));
 }
 
 a:visited, a {
-    color: rgb(224, 221, 13);
+    color: rgb(var(--yellow));
 
 }
 
@@ -37,28 +66,31 @@ header {
     justify-content: center;
     width: 100;
     width: 100%;
-    background-color: rgb(0, 0, 0);
-    color: rgb(224, 221, 13);
+    background-color: rgb(var(--black));
+    color: rgb(var(--rgb(224, 221, 13)));
+}
+
+h1 {
+    color: rgb(var(--yellow));
+    user-select: none;
 }
 
 /* controls   */
 #controls {
-    background-color: rgb(31, 31, 31);
-    color: white;
+    background-color: rgb(var(--greenish-grey));
+    color: rgb(var(--white));
     display: flex;
     flex-flow: row nowrap;
-    width: 100%;
     justify-content: center;
+    width: 100%;
 }
 
 #controls form {
     display: flex;
-    /* width: 100%; */
-    min-height: 100vh;
+    width: 100%;
     justify-content: center;
     align-items: center;
     flex-flow: row wrap;
-    /* border: 2px solid yellow; */
     border-radius: 5px;
 }
 
@@ -72,7 +104,7 @@ header {
     flex-flow: column nowrap;
     margin: 30px;
     align-items: center;
-    border: 2px solid yellow;
+    border: 2px solid rgb(var(--yellow));
 }
 
 .filter-div > div {
@@ -84,52 +116,66 @@ header {
     flex-flow: column nowrap;
     margin: 30px;
     align-items: center;
-    border: 2px solid yellow;
+    border: 2px solid rgb(var(--yellow));
 }
 
 .btn-div > div {
     padding: 20px;
 }
 
-button {
-    padding: 5px;
-    margin: 10px;
-    border-radius: 5px;
-    background-color: yellow;
-    color: rgb(0, 0, 0);
-}
-
 .selector-div {
     position: relative;
+    width: 100%;
+}
+
+#gender, select, option {
+    width: 100%;
+    padding: 5px;
+    border-radius: 5px;
+    color: rbg(var(--white));
+    background-color: rgb(var(--grey));
+    line-height: 2;
 }
 
 
+/* btns  */
+    button {
+        padding: 5px;
+        margin: 10px;
+        border-radius: 5px;
+        background-color: rgb(var(--yellow));
+        color: rgb(var(--black));
+    }
 
-            /* btns  */
-.clear {
-    background-color: red;
-    color: white;
-    padding: 10px;
-    position: absolute;
-    right: 0;
-}
+    .clear {
+        background-color: rgb(var(--red));
+        color: rgb(var(--white));
+        padding: 10px;
+        position: absolute;
+        right: 5vw;
+        outline-offset: -5px;
+        outline: 2px solid rgb(var(--white))
+    }
 
 /* results  */
 .results-section {
     position: relative;
+    padding-bottom: 300px;
+    border-bottom: 2px solid rgb(var(--grey));
 }
 
 #results {
     display: flex;
     flex-flow: row wrap;
     justify-content: space-around;
-    color: white;
+    color: rgb(var(--white));
     padding-top: 50px;
 }
 
 #results .singleCharacter {
-    border: 2px solid yellow;
-    border-radius: 10px;
+    outline: 1px solid rgb(var(--yellow));
+    outline-offset: -5px;
+    background-color: rgb(var(--greenish-grey));
     width: max-content;
     display: flex;
     justify-content: center;
@@ -153,7 +199,7 @@ button {
 
 #results .info-title {
     margin: 5px;    
-    color: rgb(224, 221, 13);
+    color: rgb(var(--yellow));
     font-size: 30px;
 }
 
@@ -186,4 +232,19 @@ button {
 
 .content-list > * {
     padding: 5px;
+}
+
+/* footer  */
+footer {
+    position: absolute;
+    display: flex;
+    width: 100%;
+    top: 100%;
+    padding: 100px;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+footer * {
+    color: rgba(var(--white), 0.3);
 }
